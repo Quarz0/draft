@@ -32,7 +32,7 @@ func runHook(p *plugin.Plugin, event string) error {
 	if err := prog.Run(); err != nil {
 		if eerr, ok := err.(*exec.ExitError); ok {
 			os.Stderr.Write(eerr.Stderr)
-			return fmt.Errorf("plugin %s hook for %q exited with error", event, p.Metadata.Name)
+			return fmt.Errorf("plugin %s hook for %q exited with error code: %v", event, p.Metadata.Name, err)
 		}
 		return err
 	}
